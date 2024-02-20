@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body>
+<h2>Welcome Admin</h2>
+<br>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Employee ID</th>
+    <th>Name</th>
+    <th>Accept Leave</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Loop through each employee in the list -->
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.employee_ID}"></td>
+    <td th:text="${employee.name}"></td>
+    <td>
+      <!-- Form to accept leave for this employee -->
+      <form th:action="@{/acceptLeave}" method="post">
+        <input type="hidden" name="employeeId" th:value="${employee.employee_ID}" />
+        <button type="submit">Accept Leave</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Other dashboard content here -->
+</body>
+</html>

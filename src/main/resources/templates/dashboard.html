@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body>
+<h2>Welcome to the Dashboard, <span th:text="${employee.name}"></span>!</h2>
+<p>Leave Request Status: <span th:text="${employee.leaveRequest ? 'Requested' : 'Not Requested'}"></span></p>
+<p>Leave Request Accepted: <span th:text="${employee.leaveRequestAccepted ? 'Yes' : 'No'}"></span></p>
+<p>Leave Balance: <span th:text="${employee.leaveBalance}"></span></p>
+
+<!-- Form to request leave -->
+<form th:action="@{/requestLeave}" method="post">
+  <input type="hidden" name="employeeId" th:value="${employee.employee_ID}" />
+  <!-- Display the button only if leave request is not accepted -->
+  <button type="submit" th:if="${!employee.leaveRequestAccepted}">Request Leave</button>
+</form>
+
+<!-- Other dashboard content here -->
+</body>
+</html>
